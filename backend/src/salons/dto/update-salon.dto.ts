@@ -45,6 +45,6 @@ export class UpdateSalonDto {
 	@IsObject()
 	@IsOptional()
 	@ApiPropertyOptional()
-	scheludes?: { days: number[]; from: string; to: string };
+	schedules?: { days: number[]; from: string; to: string };
 }
 

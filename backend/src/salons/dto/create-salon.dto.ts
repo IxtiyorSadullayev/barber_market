@@ -45,5 +45,5 @@ export class CreateSalonDto {
     @IsObject()
     @IsNotEmpty()
     @ApiProperty()
-    scheludes: { days: number[]; from: string; to: string };
+    schedules: { days: number[]; from: string; to: string };
 }

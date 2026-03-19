@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, 
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersGuard } from './users.guard';
+import { AppGuard } from '../app.guard';
 import { LoginUserDto } from './dto/login-user.dto';
 import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -23,21 +23,21 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(UsersGuard)
+  @UseGuards(AppGuard)
   @ApiBearerAuth()
   findAll(@Request() req: any) {
     return this.usersService.findAll(req);
   }
 
   @Get(':id')
-  @UseGuards(UsersGuard)
+  @UseGuards(AppGuard)
   @ApiBearerAuth()
   findOne(@Param('id') id: string, @Request() req: any) {
     return this.usersService.findOne(id, req);
   }
 
   @Patch(':id')
-  @UseGuards(UsersGuard)
+  @UseGuards(AppGuard)
   @ApiBearerAuth()
   @UseInterceptors(FileInterceptor("image"))
   @ApiConsumes('multipart/form-data')
@@ -63,7 +63,7 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @UseGuards(UsersGuard)
+  @UseGuards(AppGuard)
   @ApiBearerAuth()
   remove(@Param('id') id: string, @Request() req: any) {
     return this.usersService.remove(id, req);

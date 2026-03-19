@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SalonsModule } from './salons/salons.module';
+import { StekModule } from './stek/stek.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { SalonsModule } from './salons/salons.module';
       signOptions: { expiresIn: '1d' },
     }),
     UsersModule,
-    SalonsModule
+    SalonsModule,
+    StekModule,
   ],
   controllers: [AppController],
   providers: [AppService],

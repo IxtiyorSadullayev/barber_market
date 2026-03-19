@@ -12,5 +12,6 @@ import { UsersModule } from 'src/users/users.module';
   ],
   controllers: [SalonsController],
   providers: [SalonsService],
+  exports: [SalonsService]
 })
 export class SalonsModule { }

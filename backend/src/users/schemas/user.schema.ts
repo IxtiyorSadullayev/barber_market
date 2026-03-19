@@ -36,6 +36,12 @@ export class User {
 
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Favorite' }] })
     favorites: Favorite[];
+
+    @Prop({ required: false, default: false })
+    isDeleted: boolean;
+
+    @Prop({ required: false, default: false })
+    isBanned: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

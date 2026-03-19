@@ -1,6 +1,6 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { User } from 'src/users/schemas/user.schema';
 
 export type SalonDocument = HydratedDocument<Salon>;
@@ -49,11 +49,12 @@ export class Salon {
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
     owner: User;
 
-    @Prop({type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], default: []})
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], default: [] })
     employees: User[];
 
     @Prop({ type: SalonSchedule, required: true })
-    scheludes: SalonSchedule;
+    schedules: SalonSchedule;
+
 }
 
 export const SalonSchema = SchemaFactory.createForClass(Salon);

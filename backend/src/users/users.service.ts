@@ -79,7 +79,7 @@ export class UsersService implements OnModuleInit {
         ]
       })
 
-      if (!user) {
+      if (!user || user.isDeleted || user.isBanned) {
         throw new HttpException('Foydalanuvchi topilmadi', HttpStatus.NOT_FOUND);
       }
 
@@ -144,8 +144,7 @@ export class UsersService implements OnModuleInit {
         if (updateUserDto.password) {
           updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
         }
-        await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
-        return { message: 'Foydalanuvchi muvaffaqiyatli yangilandi' };
+        return await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true })
       } else {
         throw new HttpException('Siz bu ma\'lumotlarni yangilay olmaysiz', HttpStatus.FORBIDDEN);
       }

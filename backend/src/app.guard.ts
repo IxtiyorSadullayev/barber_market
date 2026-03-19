@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } 
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class SalonsGuard implements CanActivate {
+export class AppGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   canActivate(
@@ -10,7 +10,7 @@ export class SalonsGuard implements CanActivate {
   ): boolean {
 
     const request = context.switchToHttp().getRequest();
-    // console.log('SalonsGuard is working', request.headers.authorization);
+    // console.log('AppGuard is working', request.headers.authorization);
     const authHeader = request.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return false; 
