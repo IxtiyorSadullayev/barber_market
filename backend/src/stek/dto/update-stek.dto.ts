@@ -2,7 +2,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 
-class UpdateScheduleDto {
+class UpdateSchedulesDto {
 	@IsNumber()
 	@IsOptional()
 	@IsNotEmpty()
@@ -29,15 +29,19 @@ export class UpdateStekDto {
 	@ApiPropertyOptional()
 	salon?: string;
 
-	@IsNumber()
+	@IsString()
 	@IsOptional()
-	@IsNotEmpty()
 	@ApiPropertyOptional()
-	price?: number;
+	user?: string;
+
+	@IsString()
+	@IsOptional()
+	@ApiPropertyOptional()
+	status?: string;
 
 	@ValidateNested()
 	@IsOptional()
-	@Type(() => UpdateScheduleDto)
-	@ApiPropertyOptional({ type: UpdateScheduleDto })
-	schedule?: UpdateScheduleDto;
+	@Type(() => UpdateSchedulesDto)
+	@ApiPropertyOptional({ type: UpdateSchedulesDto })
+	schedules?: UpdateSchedulesDto;
 }

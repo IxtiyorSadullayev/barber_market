@@ -47,10 +47,10 @@ export class Salon {
     images: string[];
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
-    owner: User;
+    owner: mongoose.Types.ObjectId;
 
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], default: [] })
-    employees: User[];
+    employees: mongoose.Types.ObjectId[];
 
     @Prop({ type: SalonSchedule, required: true })
     schedules: SalonSchedule;

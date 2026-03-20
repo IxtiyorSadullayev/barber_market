@@ -18,7 +18,7 @@ export class SalonsService {
       if (!owner) {
         return new HttpException('Yaratuvchi ma\'lumoti topilmadi', HttpStatus.NOT_FOUND);
       }
-      if(owner.isBanned || owner.isDeleted) {
+      if (owner.isBanned || owner.isDeleted) {
         return new HttpException('Yaratuvchi ma\'lumoti o\'chirilgan yoki bloklangan', HttpStatus.NOT_FOUND);
       }
       const { userId, role } = req.user
@@ -42,7 +42,8 @@ export class SalonsService {
       if (role === 'admin') {
         throw new HttpException('Siz bu ma\'lumotlarni ololmaysiz', HttpStatus.FORBIDDEN);
       }
-      return await this.salonModel.find().populate('owner').populate('employees');
+      const salons = await this.salonModel.find().populate('owner').populate('employees');
+      return salons
     } catch (error) {
       throw new HttpException('Xatolik yuz berdi: ' + error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

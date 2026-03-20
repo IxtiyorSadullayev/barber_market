@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
-class ScheduleDto {
+class SchedulesDto {
     @IsNumber()
     @IsNotEmpty()
     @ApiProperty()
@@ -25,13 +25,18 @@ export class CreateStekDto {
     @ApiProperty()
     salon: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
     @ApiProperty()
-    price: number;
+    user: string;
+
+    @IsString()
+    @IsOptional()
+    @ApiProperty()
+    status: string;
 
     @ValidateNested()
-    @Type(() => ScheduleDto)
-    @ApiProperty({ type: ScheduleDto })
-    schedule: ScheduleDto;
+    @Type(() => SchedulesDto)
+    @ApiProperty({ type: SchedulesDto })
+    schedules: SchedulesDto;
 }
